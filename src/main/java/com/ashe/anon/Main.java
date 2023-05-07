@@ -35,6 +35,7 @@ import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import org.json.*;
@@ -50,7 +51,7 @@ public class Main {
         System.out.println("Welcome to Ashe. Data Anonymity Made Simple!\n");
 
         final String BASE_URI = "http://localhost:8000/";
-        final ResourceConfig rc = new ResourceConfig().packages("com.ashe.anon");
+        final ResourceConfig rc = new ResourceConfig().packages("com.ashe.anon").register(MultiPartFeature.class);
         final HttpServer server = GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
 
         System.out.println("Server: " + BASE_URI + " (WADL: " + BASE_URI + "application.wadl)");
