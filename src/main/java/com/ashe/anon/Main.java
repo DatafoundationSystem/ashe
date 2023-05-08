@@ -69,7 +69,7 @@ public class Main {
     @Path("/login")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
-    public String login(String creds) throws IOException {
+    public Response login(String creds) throws IOException {
         path = FileSystemView.getFileSystemView().getHomeDirectory().getAbsolutePath();
         File dir = new File(path + "/ashe");
 
@@ -92,9 +92,23 @@ public class Main {
         }
 
         if (username.equals("admin") && password.equals("admin")) {
-            return "success";
+            return Response.status(200)
+                    .header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Credentials", "true")
+                    .header("Access-Control-Allow-Headers",
+                            "origin, content-type, accept, authorization")
+                    .header("Access-Control-Allow-Methods",
+                            "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+                    .entity("User Authenticated!").build();
         } else {
-            return "failure";
+            return Response.status(401)
+                    .header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Credentials", "true")
+                    .header("Access-Control-Allow-Headers",
+                            "origin, content-type, accept, authorization")
+                    .header("Access-Control-Allow-Methods",
+                            "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+                    .entity("User Not Authenticated!").build();
         }
     }
 
@@ -123,14 +137,21 @@ public class Main {
             throw new WebApplicationException("Error while uploading file. Please try again.");
         }
 
-        return Response.ok("Data Source uploaded successfully!").build();
+        return Response.status(200)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Credentials", "true")
+                .header("Access-Control-Allow-Headers",
+                        "origin, content-type, accept, authorization")
+                .header("Access-Control-Allow-Methods",
+                        "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+                .entity("Data Source Uploaded!").build();
     }
 
     @POST
     @Path("/uploadConfig")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
-    public String uploadConfig(String text) {
+    public Response uploadConfig(String text) {
         path = FileSystemView.getFileSystemView().getHomeDirectory().getAbsolutePath();
         String UPLOAD_PATH = path + "/ashe/Configurations/";
 
@@ -172,7 +193,14 @@ public class Main {
             e.printStackTrace();
         }
 
-        return "success";
+        return Response.status(200)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Credentials", "true")
+                .header("Access-Control-Allow-Headers",
+                        "origin, content-type, accept, authorization")
+                .header("Access-Control-Allow-Methods",
+                        "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+                .entity("Configuration Uploaded!").build();
     }
 
     @POST
@@ -199,14 +227,21 @@ public class Main {
             throw new WebApplicationException("Error while uploading file. Please try again.");
         }
 
-        return Response.ok("Hierarchy uploaded successfully!").build();
+        return Response.status(200)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Credentials", "true")
+                .header("Access-Control-Allow-Headers",
+                        "origin, content-type, accept, authorization")
+                .header("Access-Control-Allow-Methods",
+                        "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+                .entity("Hierarchy Uploaded!").build();
     }
 
     @POST
     @Path("/anonymize")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
-    public String anonymize(String req) throws IOException {
+    public Response anonymize(String req) throws IOException {
         try {
             JSONObject data = new JSONObject(req);
 
@@ -287,7 +322,14 @@ public class Main {
                 config.setSuppressionLimit(Double.parseDouble(suppressionRateValue));
                 config.setQualityModel(Metric.createLossMetric());
             } else {
-                return "ARX does not support this model";
+                return Response.status(200)
+                        .header("Access-Control-Allow-Origin", "*")
+                        .header("Access-Control-Allow-Credentials", "true")
+                        .header("Access-Control-Allow-Headers",
+                                "origin, content-type, accept, authorization")
+                        .header("Access-Control-Allow-Methods",
+                                "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+                        .entity("Privacy Model Not Supported!").build();
             }
 
             ARXAnonymizer anonymizer = new ARXAnonymizer();
@@ -303,7 +345,14 @@ public class Main {
             e.printStackTrace();
         }
 
-        return "success";
+        return Response.status(200)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Credentials", "true")
+                .header("Access-Control-Allow-Headers",
+                        "origin, content-type, accept, authorization")
+                .header("Access-Control-Allow-Methods",
+                        "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+                .entity("Anonymization Completed!").build();
     }
 
     @GET
@@ -316,7 +365,14 @@ public class Main {
         File f = new File(RESULT_PATH);
         Response.ResponseBuilder response = Response.ok((Object) f);
         response.header("Content-Disposition", "attachment; filename=" + "output.csv");
-        return response.build();
+        return Response.status(200)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Credentials", "true")
+                .header("Access-Control-Allow-Headers",
+                        "origin, content-type, accept, authorization")
+                .header("Access-Control-Allow-Methods",
+                        "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+                .entity("Result Downloaded!").build();
     }
 
     protected static void analyze(final ARXResult result, final Data data) {
