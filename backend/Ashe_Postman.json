@@ -1,0 +1,177 @@
+{
+	"info": {
+		"_postman_id": "fce8d3ca-b61a-48da-a4be-e28b5757378f",
+		"name": "Ashe",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27268798"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"admin\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/anon/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"anon",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload Source",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/home/frey/eclipse-workspace/anon/data/adult.csv"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/anon/uploadSource",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"anon",
+						"uploadSource"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload Config",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"file_name\": \"config.xml\",\n    \"attributes\": [\n        {\n            \"attribute_name\": \"sex\",\n            \"attributeType\": \"QUASI_IDENTIFYING\",\n            \"DataType\": \"string\"\n        },\n        {\n            \"attribute_name\": \"age\",\n            \"attributeType\": \"QUASI_IDENTIFYING\",\n            \"DataType\": \"int\"\n        },\n        {\n            \"attribute_name\": \"race\",\n            \"attributeType\": \"QUASI_IDENTIFYING\",\n            \"DataType\": \"string\"\n        },\n        {\n            \"attribute_name\": \"marital-status\",\n            \"attributeType\": \"QUASI_IDENTIFYING\",\n            \"DataType\": \"string\"\n        },\n        {\n            \"attribute_name\": \"education\",\n            \"attributeType\": \"QUASI_IDENTIFYING\",\n            \"DataType\": \"string\"\n        },\n        {\n            \"attribute_name\": \"native-country\",\n            \"attributeType\": \"QUASI_IDENTIFYING\",\n            \"DataType\": \"string\"\n        },\n        {\n            \"attribute_name\": \"workclass\",\n            \"attributeType\": \"QUASI_IDENTIFYING\",\n            \"DataType\": \"string\"\n        },\n        {\n            \"attribute_name\": \"occupation\",\n            \"attributeType\": \"QUASI_IDENTIFYING\",\n            \"DataType\": \"string\"\n        },\n        {\n            \"attribute_name\": \"salary-class\",\n            \"attributeType\": \"QUASI_IDENTIFYING\",\n            \"DataType\": \"string\"\n        }\n    ],\n    \"privacy_config\": {\n        \"k\": \"2\",\n        \"model\": \"KANONYMITY\",\n        \"rate\": \"0d\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/anon/uploadConfig",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"anon",
+						"uploadConfig"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload Hierarchy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/home/frey/eclipse-workspace/anon/data/adult_hierarchy_sex.csv"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/anon/uploadHierarchy",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"anon",
+						"uploadHierarchy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Anonymize",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"data\": \"adult.csv\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/anon/anonymize",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"anon",
+						"anonymize"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Result",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/anon/getResult",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"anon",
+						"getResult"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

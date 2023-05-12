@@ -1,0 +1,34 @@
+version: "3.3"
+services:
+  back:
+    build: ./backend
+    restart: unless-stopped
+    ports:
+      - 8000:8000
+    networks:
+      - backend
+  front:
+    build:
+      context: ./frontend
+    ports:
+      - 3000:3000
+    networks:
+      - frontend
+  nginx:
+    depends_on:
+      - front
+      - back
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile.dev
+    ports:
+      - 80:80
+    networks:
+      - backend
+      - frontend
+    restart: always
+volumes:
+  db:
+networks:
+  backend:
+  frontend:
